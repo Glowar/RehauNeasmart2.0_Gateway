@@ -68,15 +68,30 @@ class LockingPersistentDataBlock(ModbusSequentialDataBlock):
 
 def setup_server_context(datastore_path):
     datablock = LockingPersistentDataBlock.create_lpdb(datastore_path)
-    slave_context = {
-        slave_id: ModbusSlaveContext(
+    #slave_context = {
+    #    slave_id: ModbusSlaveContext(
+    #        di=None,
+    #        co=None,
+    #        hr=datablock,
+    #        ir=None,
+     #       zero_mode=True,
+     #   ),
+    #}
+    slave_context = {}
+    slave_context[240] = ModbusSlaveContext(
             di=None,
             co=None,
             hr=datablock,
             ir=None,
             zero_mode=True,
-        ),
-    }
+        )
+    slave_context[241] = ModbusSlaveContext(
+            di=None,
+            co=None,
+            hr=datablock,
+            ir=None,
+            zero_mode=True,
+        )
 
     return ModbusServerContext(slaves=slave_context, single=False)
 
@@ -98,7 +113,7 @@ async def run_modbus_server(server_context, server_addr, conn_type):
             identity=identity,
             address=server_addr,
             framer=ModbusSocketFramer,
-            allow_reuse_address=True,
+            #allow_reuse_address=True,
             ignore_missing_slaves=True,
             broadcast_enable=True,
         )
