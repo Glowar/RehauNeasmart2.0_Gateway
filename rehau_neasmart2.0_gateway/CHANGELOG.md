@@ -1,3 +1,7 @@
+## 0.2.7
+
+- Fix settings reset
+
 ## 0.2.6
 
 - Fix POST endpoint set zone op_status temperature target, typos
