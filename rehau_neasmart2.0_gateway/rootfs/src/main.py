@@ -315,13 +315,14 @@ def mode():
     elif request.method == 'POST':
         payload = request.json
         op_mode = payload.get("mode")
-        if not op_mode:
-            return app.response_class(
-                response=json.dumps({"err": "missing mode key in payload"}),
-                status=400,
-                mimetype='application/json'
-            )
-        if type(op_mode) is not int or op_mode == 0 or op_mode > 5:
+        #if not op_mode:
+        #    return app.response_class(
+        #        response=json.dumps({"err": "missing mode key in payload"}),
+        #        status=400,
+        #        mimetype='application/json'
+        #    )
+        #if type(op_mode) is not int or op_mode == 0 or op_mode > 5:
+        if type(op_mode) is not int or op_mode < 0 or op_mode > 5:
             return app.response_class(
                 response=json.dumps({"err": "invalid mode"}),
                 status=400,
@@ -365,7 +366,7 @@ def state():
         #        mimetype='application/json'
         #    )
         #if type(op_state) is not int and op_state == 0 or op_state > 6:
-        if type(op_state) is not int or op_state > 6:            
+        if type(op_state) is not int or op_state < 0 or op_state > 6:            
             return app.response_class(
                 response=json.dumps({"err": "invalid state"}),
                 status=400,
