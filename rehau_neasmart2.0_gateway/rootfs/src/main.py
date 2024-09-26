@@ -419,7 +419,7 @@ def get_extra_pumps(pump_id=None):
     data = {
         "pump_state": context[slave_id].getValues(
             const.READ_HR_CODE,
-            pump_id + const.EXTRA_PUMPS_ADDR_OFFSET,
+            pump_id + const.EXTRA_PUMPS_ADDR_OFFSET - 1,
             count=1)[0],
     }
 
