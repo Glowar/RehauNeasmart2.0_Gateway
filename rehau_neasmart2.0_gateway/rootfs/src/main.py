@@ -358,13 +358,14 @@ def state():
     elif request.method == 'POST':
         payload = request.json
         op_state = payload.get("state")
-        if not op_state:
-            return app.response_class(
-                response=json.dumps({"err": "missing state key in payload"}),
-                status=400,
-                mimetype='application/json'
-            )
-        if type(op_state) is not int and op_state == 0 or op_state > 6:
+        #if not op_state:
+        #    return app.response_class(
+        #        response=json.dumps({"err": "missing state key in payload"}),
+        #        status=400,
+        #        mimetype='application/json'
+        #    )
+        #if type(op_state) is not int and op_state == 0 or op_state > 6:
+        if type(op_state) is not int or op_state > 6:            
             return app.response_class(
                 response=json.dumps({"err": "invalid state"}),
                 status=400,
